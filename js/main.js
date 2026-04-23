@@ -99,3 +99,101 @@ document.addEventListener('mousemove', function (e) {
     setTimeout(function () { p.remove(); }, duration + 50);
   }
 })();
+
+// Avatar Klick
+document.getElementById('s-initial').addEventListener('click', function () {
+  var av = this;
+  av.classList.remove('popping');
+  void av.offsetWidth; // reflow trick damit animation neu startet
+  av.classList.add('popping');
+  setTimeout(function () { av.classList.remove('popping'); }, 400);
+});
+
+// Twitch Live Badge
+(function () {
+  var twitchUser = 'itsrelaxo';
+
+  fetch('https://decapi.me/twitch/uptime/' + twitchUser)
+    .then(function (r) { return r.text(); })
+    .then(function (text) {
+      var isLive = !text.toLowerCase().includes('offline') && !text.toLowerCase().includes('not live');
+      if (!isLive) return;
+
+      var twitchLink = document.querySelector('a[href*="twitch.tv"]');
+      if (!twitchLink) return;
+
+      var badge = document.createElement('span');
+      badge.textContent = '● LIVE';
+      badge.style.cssText =
+        'position:absolute;top:-6px;right:-6px;' +
+        'background:#e53935;color:#fff;font-size:9px;font-weight:700;' +
+        'padding:2px 5px;border-radius:99px;letter-spacing:0.05em;' +
+        'border:1.5px solid var(--bg);pointer-events:none;';
+
+      twitchLink.parentElement.style.position = 'relative';
+      twitchLink.parentElement.appendChild(badge);
+    })
+    .catch(function () {});
+})();
+
+// Custom Cursor
+(function () {
+  var cursor = document.getElementById('cursor');
+  
+  // Transition nur für size, NICHT für position
+  cursor.style.transition = 'width 0.15s ease, height 0.15s ease, opacity 0.2s ease';
+
+  document.addEventListener('mousemove', function (e) {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest('a, button, [role="button"]')) {
+      cursor.style.width  = '28px';
+      cursor.style.height = '28px';
+    }
+  });
+
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest('a, button, [role="button"]')) {
+      cursor.style.width  = '20px';
+      cursor.style.height = '20px';
+    }
+  });
+
+  document.addEventListener('mouseleave', function () { cursor.style.opacity = '0'; });
+  document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
+})();
+
+// Animated Title + Come Back
+(function () {
+  var frames   = ['Relaxo', 'R e l a x o', 'relaxo~', '( relaxo )'];
+  var idx      = 0;
+  var interval = null;
+
+  function startAnimation() {
+    interval = setInterval(function () {
+      idx = (idx + 1) % frames.length;
+      document.title = frames[idx];
+    }, 2000);
+  }
+
+  function stopAnimation() {
+    clearInterval(interval);
+    document.title = CONFIG.name;
+  }
+
+  startAnimation();
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stopAnimation();
+      document.title = '👋 come back!';
+    } else {
+      document.title = CONFIG.name;
+      startAnimation();
+    }
+  });
+})();
+

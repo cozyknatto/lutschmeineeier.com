@@ -9,6 +9,31 @@ function renderHero() {
   document.getElementById('s-name').textContent   = CONFIG.name;
   document.getElementById('s-bio').textContent    = CONFIG.bio;
   document.getElementById('s-footer').textContent = CONFIG.name.toLowerCase() + '.gay';
+
+   // Typing Bio
+  var bioEl = document.getElementById('s-bio');
+  var text  = CONFIG.bio;
+  var i     = 0;
+  bioEl.textContent = '';
+
+  // Cursor Element
+  var cursor = document.createElement('span');
+  cursor.textContent = '|';
+  cursor.style.cssText = 'color:var(--accent);animation:blink 0.7s step-end infinite;margin-left:1px;';
+  bioEl.appendChild(cursor);
+
+  setTimeout(function type() {
+    if (i < text.length) {
+      bioEl.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+      setTimeout(type, 35 + Math.random() * 25);
+    } else {
+      setTimeout(function () {
+        cursor.style.animation = 'none';
+        cursor.style.opacity   = '0';
+      }, 1000);
+    }
+  }, 600);
 }
 
 function renderSocials() {

@@ -172,6 +172,26 @@ body::before {
   z-index: 1;
 }
 
+.thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(0, 229, 160, 0.08) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position 0.5s ease;
+  z-index: 2;
+}
+
+.card:hover .thumb::after {
+  background-position: -200% 0;
+}
+
 .card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .card-name { font-size: 15px; font-weight: 600; color: var(--white); }
 .card-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
@@ -344,6 +364,97 @@ body::before {
   background: radial-gradient(circle, rgba(0, 229, 160, 0.07) 0%, transparent 70%);
   transform: translate(-50%, -50%);
   transition: left 0.08s ease, top 0.08s ease;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes avatar-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.15) rotate(-5deg); }
+  70%  { transform: scale(0.95) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.avatar.popping {
+  animation: avatar-pop 0.4s ease, ring-spin 3s linear infinite !important;
+}
+
+/* ── CUSTOM CURSOR ── */
+* { cursor: none !important; }
+
+/* ── CUSTOM CURSOR ── */
+* { cursor: none !important; }
+
+/* ── CUSTOM CURSOR ── */
+* { cursor: none !important; }
+
+.cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  left: -100px;
+  top: -100px;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease, opacity 0.2s ease;
+}
+
+/* 4 Linien als Crosshair */
+.cursor::before,
+.cursor::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Horizontale Linie */
+.cursor::before {
+  width: 100%;
+  height: 1.5px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  box-shadow: 0 0 6px rgba(0, 229, 160, 0.6);
+}
+
+/* Vertikale Linie */
+.cursor::after {
+  width: 1.5px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px rgba(0, 229, 160, 0.6);
+}
+
+/* Mittelpunkt Lücke — kleines Quadrat das die Mitte ausblendet */
+.cursor-center {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--bg);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+body:has(a:hover) .cursor,
+body:has(button:hover) .cursor {
+  width: 16px;
+  height: 16px;
+}
+
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 44px;
+  height: 44px;
+  border-color: rgba(0, 229, 160, 0.8);
 }
 
 /* ── FOOTER ── */
