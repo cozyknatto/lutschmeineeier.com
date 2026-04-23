@@ -1,11 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>cozy ist schwul</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relaxo</title>
+    <meta name="description" content="Relaxo — building stuff on the internet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <div class="avatar" data-a id="s-initial"></div>
+        <h1 class="name" data-a id="s-name"></h1>
+        <p class="bio" data-a id="s-bio"></p>
+        <div class="socials" data-a id="s-socials"></div>
+      </section>
+
+      <div class="dc" id="dc">
+        <div class="dc-left">
+          <div class="dc-avwrap">
+            <img class="dc-av" id="dc-av" src="" alt="avatar" />
+            <span class="dc-dot offline" id="dc-dot"></span>
+          </div>
+          <div class="dc-info">
+            <div class="dc-nameline">
+              <span class="dc-name" id="dc-name"></span>
+            </div>
+            <div class="dc-sub">
+              <span class="dc-handle" id="dc-handle"></span>
+            </div>
+          </div>
+        </div>
+        <span class="dc-clan" id="dc-clan">
+          <img class="dc-clan-badge" id="dc-clan-badge" src="" alt="" />
+          <span id="dc-clan-tag"></span>
+        </span>
+      </div>
+
+      <div class="dc-activity-bar" id="dc-activity-bar">
+        <div class="dc-spot" id="dc-spot">
+          <svg class="dc-spot-icon" viewBox="0 0 24 24">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+          </svg>
+          <img class="dc-art" id="dc-art" src="" alt="" />
+          <div class="dc-track">
+            <span class="dc-song" id="dc-song"></span>
+            <span class="dc-artist" id="dc-artist"></span>
+          </div>
+        </div>
+        <span class="dc-game" id="dc-game"></span>
+      </div>
+
+      <p class="section-title" data-a>projects</p>
+      <div class="grid" id="s-grid"></div>
+      <footer data-a id="s-footer"></footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/lanyard.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
