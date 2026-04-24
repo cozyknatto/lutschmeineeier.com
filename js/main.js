@@ -168,7 +168,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Animated Title + Come Back
 (function () {
-  var frames   = ['Cozy', 'C o z y', 'cozy~', '( cozy )', 'c o z y', 'Cozy'];
+  var frames   = ['Cozy', 'Coz', 'Co', 'C', 'Co', 'Coz', 'Cozy', '~ozy', 'C~zy', 'Co~y', 'Coz~', 'Cozy', 'Coz y', 'Co z y', 'C o z y', 'C o zy', 'C ozy'];
   var idx      = 0;
   var interval = null;
 
@@ -189,7 +189,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
       stopAnimation();
-      document.title = '👋 come back!';
+      document.title = 'Cozy';
     } else {
       document.title = CONFIG.name;
       startAnimation();
