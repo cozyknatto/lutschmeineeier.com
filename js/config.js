@@ -36,5 +36,13 @@ var CONFIG = {
       gradient: 'linear-gradient(135deg, #0d2018, #1a3d2b)',
       tags:     ['HTML', 'CSS', 'JavaScript'],
     }, */
+    {
+      name: 'Hypixel Auto Friend',
+      desc: 'Automatically accepts friend requests on Hypixel. Open-source and free to use.',
+      url: 'https://modrinth.com/mod/hypixelautofriend',
+      gradient: 'linear-gradient(135deg, #1a0d2b, #2d1045)',
+      tags: ['Hypixel Skyblock', 'Minecraft'],
+      img: 'img/hypixelautofriend.png',
+    }
   ],
 };
