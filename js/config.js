@@ -8,8 +8,8 @@ var CONFIG = {
   hideBadges: ['quest_completed', 'orb_profile_badge'],
 
   socials: [
-    { title: 'GitHub',    url: 'https://github.com/RelaxoGIT',       icon: 'github'    },
-    { title: 'Steam',    url: 'https://steamcommunity.com/id/relaxocs/',       icon: 'steam'    },
+    { title: 'GitHub',    url: 'https://github.com/cozyknatto',       icon: 'github'    },
+    { title: 'Steam',    url: 'https://steamcommunity.com/id/muckelig',       icon: 'steam'    },
     { title: 'Discord Server',   url: 'https://discord.awall.wtf',           icon: 'discord'   },
     { title: 'Instagram', url: 'https://instagram.com/rlx0.official', icon: 'instagram' },
     { title: 'Twitter',   url: 'https://x.com/itsrelaxo',            icon: 'twitter'   },

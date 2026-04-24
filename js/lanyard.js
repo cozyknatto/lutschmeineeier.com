@@ -1,5 +1,5 @@
 (function () {
-  var UID = "552062519171350550";
+  var UID = CONFIG.discord;
   var card = document.getElementById("dc");
   var avEl = document.getElementById("dc-av");
   var dotEl = document.getElementById("dc-dot");
