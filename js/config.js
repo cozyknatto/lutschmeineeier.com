@@ -3,7 +3,7 @@ var CONFIG = {
   bio:  'doing stupid shit on the internet',
   avatar: 'img/pfp.png',
 
-  discord: '552062519171350550',
+  discord: '1180856619769274470',
 
   hideBadges: ['quest_completed', 'orb_profile_badge'],
 
