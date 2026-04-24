@@ -176,7 +176,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
     interval = setInterval(function () {
       idx = (idx + 1) % frames.length;
       document.title = frames[idx];
-    }, 2000);
+    }, 1000);
   }
 
   function stopAnimation() {
