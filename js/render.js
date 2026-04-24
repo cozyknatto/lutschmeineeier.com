@@ -66,7 +66,7 @@ function renderProjects() {
     a.href      = p.url;
     a.className = 'card';
     a.setAttribute('data-a', '');
-    if (p.newTab) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    a.target = '_blank'; a.rel = 'noopener noreferrer';
 
     var imgHtml  = p.img ? '<img src="' + p.img + '" alt="' + p.name + '">' : '';
     var tagsHtml = (p.tags || []).map(function (t) {
