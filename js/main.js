@@ -111,7 +111,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Twitch Live Badge
 (function () {
-  var twitchUser = 'itsrelaxo';
+  var twitchUser = 'huggcozy';
 
   fetch('https://decapi.me/twitch/uptime/' + twitchUser)
     .then(function (r) { return r.text(); })
@@ -168,7 +168,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Animated Title + Come Back
 (function () {
-  var frames   = ['Relaxo', 'R e l a x o', 'relaxo~', '( relaxo )'];
+  var frames   = ['Cozy', 'C o z y', 'cozy~', '( cozy )', 'c o z y', 'Cozy'];
   var idx      = 0;
   var interval = null;
 
