@@ -1,0 +1,62 @@
+
+  {
+    {
+    "content_classification": {
+      "data": null,
+      "loaded": true
+    },
+    "created_at": 1777064731100,
+    "id": "custom",
+    "name": "Custom Status",
+    "session_id": "1704f191ed31d714434b07d44b1d29d0",
+    "state": "Setz' den Hoodie auf, ich 🏃 durch die 🌃 🎧 in mei'm 👂 und ich ✨ ' Und ihr 🍑 - 📳 hält mich wieder wach 🏃 durch die 🏙️ ️ bi",
+    "type": 4
+},
+
+
+  {
+    "assets": {
+      "large_image": "spotify:ab67616d0000b273becb6a4b830e3dc7114d903f",
+      "large_text": "Soldat"
+    },
+    "content_classification": {
+      "data": null,
+      "loaded": true
+    },
+    "created_at": 1777065764088,
+    "details": "Soldat",
+    "flags": 48,
+    "id": "spotify:1",
+    "name": "Spotify",
+    "party": {
+      "id": "spotify:1180856619769274470"
+    },
+    "session_id": "1704f191ed31d714434b07d44b1d29d0",
+    "state": "ok.danke.tschüss",
+    "sync_id": "5aUA7Y5yZj9yJb55Xra6Yj",
+    "timestamps": {
+      "end": 1777065938290,
+      "start": 1777065761975
+    },
+    "type": 2
+  },
+
+
+  {
+    "application_id": "1158877933042143272",
+    "content_classification": {
+      "data": null,
+      "loaded": true
+    },
+    "created_at": 1777064743800,
+    "id": "27a05293dff5e88a",
+    "name": "Counter-Strike 2",
+    "session_id": "1704f191ed31d714434b07d44b1d29d0",
+    "timestamps": {
+      "start": 1777064741857
+    },
+    "type": 0
+  }
+
+  
+}

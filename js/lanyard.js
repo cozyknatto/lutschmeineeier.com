@@ -9,26 +9,67 @@
   var actBarEl = document.getElementById("dc-activity-bar");
   var actEl = document.getElementById("dc-activity");
 
-  var timerInterval = null;
+  var timerIntervals = [];
+  var assetCache = {};  // appId -> Promise<{[name]: id}>
+  var iconCache = {};   // appId -> Promise<url|null>
 
   var TYPE_LABELS = { 0: 'Playing', 1: 'Streaming', 2: 'Listening to', 3: 'Watching', 5: 'Competing in' };
 
-  // Resolve a Discord activity asset key to a full image URL
-  function resolveAsset(applicationId, key) {
-    if (!key) return null;
-    if (key.indexOf('mp:external/') === 0) {
-      return 'https://media.discordapp.net/external/' + key.slice('mp:external/'.length);
+  // Resolve named asset key -> numeric ID via Discord's public assets endpoint
+  function fetchAssetMap(appId) {
+    if (!assetCache[appId]) {
+      assetCache[appId] = fetch(
+        'https://discord.com/api/v10/oauth2/applications/' + appId + '/assets'
+      )
+        .then(function (r) { return r.json(); })
+        .then(function (list) {
+          var map = {};
+          if (Array.isArray(list)) list.forEach(function (a) { map[a.name] = a.id; });
+          return map;
+        })
+        .catch(function () { return {}; });
     }
-    if (key.indexOf('spotify:') === 0) {
-      return 'https://i.scdn.co/image/' + key.slice('spotify:'.length);
+    return assetCache[appId];
+  }
+
+  // Fetch the app's cover/icon URL when no assets are present in the activity
+  function fetchAppIcon(appId) {
+    if (!iconCache[appId]) {
+      iconCache[appId] = fetch(
+        'https://discord.com/api/v10/oauth2/applications/' + appId + '/rpc'
+      )
+        .then(function (r) { return r.json(); })
+        .then(function (app) {
+          if (app.cover_image)
+            return 'https://cdn.discordapp.com/app-icons/' + appId + '/' + app.cover_image + '.png?size=128';
+          if (app.icon)
+            return 'https://cdn.discordapp.com/app-icons/' + appId + '/' + app.icon + '.png?size=128';
+          return null;
+        })
+        .catch(function () { return null; });
     }
-    if (key.indexOf('https://') === 0 || key.indexOf('http://') === 0) {
-      return key;
-    }
-    if (applicationId) {
-      return 'https://cdn.discordapp.com/app-assets/' + applicationId + '/' + key + '.png';
-    }
-    return null;
+    return iconCache[appId];
+  }
+
+  // Load an image: tries direct CDN first, falls back to asset name lookup via API
+  function tryLoadImage(imgEl, appId, key) {
+    if (!key) return;
+
+    if (key.indexOf('mp:external/') === 0) { imgEl.src = 'https://media.discordapp.net/external/' + key.slice('mp:external/'.length); return; }
+    if (key.indexOf('spotify:') === 0)      { imgEl.src = 'https://i.scdn.co/image/' + key.slice('spotify:'.length); return; }
+    if (key.indexOf('https://') === 0 || key.indexOf('http://') === 0) { imgEl.src = key; return; }
+
+    // On CDN failure, try resolving named asset key -> numeric ID via API
+    imgEl.onerror = function () {
+      imgEl.onerror = function () { /* all attempts failed */ };
+      if (!appId) return;
+      fetchAssetMap(appId).then(function (map) {
+        var id = map[key];
+        if (id) imgEl.src = 'https://cdn.discordapp.com/app-assets/' + appId + '/' + id + '.png';
+      });
+    };
+
+    imgEl.src = 'https://cdn.discordapp.com/app-assets/' + appId + '/' + key + '.png';
   }
 
   function fmtTime(ms) {
@@ -39,9 +80,51 @@
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
 
-  function renderSpotify(sp) {
-    clearInterval(timerInterval);
+  function row(inner) {
+    var div = document.createElement('div');
+    div.className = 'dc-act-row';
+    div.appendChild(inner);
+    return div;
+  }
 
+  function makeArtWrap(imgEl) {
+    var wrap = document.createElement('div');
+    wrap.className = 'dc-rich-art-wrap';
+    wrap.style.display = 'none';
+    imgEl.onload = function () { wrap.style.display = ''; };
+    wrap.appendChild(imgEl);
+    return wrap;
+  }
+
+  function buildCustomStatus(act) {
+    var div = document.createElement('div');
+    div.className = 'dc-custom';
+
+    if (act.emoji) {
+      if (act.emoji.id) {
+        var img = document.createElement('img');
+        img.src = 'https://cdn.discordapp.com/emojis/' + act.emoji.id + (act.emoji.animated ? '.gif' : '.png') + '?size=20';
+        img.style.cssText = 'width:18px;height:18px;object-fit:contain;flex-shrink:0;vertical-align:middle;';
+        div.appendChild(img);
+      } else if (act.emoji.name) {
+        var emojiSpan = document.createElement('span');
+        emojiSpan.style.flexShrink = '0';
+        emojiSpan.textContent = act.emoji.name;
+        div.appendChild(emojiSpan);
+      }
+    }
+
+    if (act.state) {
+      var text = document.createElement('span');
+      text.className = 'dc-custom-text';
+      text.textContent = act.state;
+      div.appendChild(text);
+    }
+
+    return row(div);
+  }
+
+  function buildSpotify(sp) {
     var div = document.createElement('div');
     div.className = 'dc-spot';
 
@@ -74,54 +157,27 @@
       var timeEl = document.createElement('span');
       timeEl.className = 'dc-artist';
       timeEl.style.fontVariantNumeric = 'tabular-nums';
-      function tick() {
-        var elapsed = Date.now() - sp.timestamps.start;
-        var total = sp.timestamps.end - sp.timestamps.start;
-        timeEl.textContent = fmtTime(elapsed) + ' / ' + fmtTime(total);
-      }
-      tick();
-      timerInterval = setInterval(tick, 1000);
+      (function (el, ts) {
+        function tick() {
+          var elapsed = Date.now() - ts.start;
+          var total = ts.end - ts.start;
+          el.textContent = fmtTime(elapsed) + ' / ' + fmtTime(total);
+        }
+        tick();
+        timerIntervals.push(setInterval(tick, 1000));
+      })(timeEl, sp.timestamps);
       track.appendChild(timeEl);
     }
 
     div.appendChild(svg);
     div.appendChild(art);
     div.appendChild(track);
-
-    actEl.innerHTML = '';
-    actEl.appendChild(div);
-    actBarEl.classList.add('visible');
+    return row(div);
   }
 
-  function renderRich(act) {
-    clearInterval(timerInterval);
-
+  function buildRich(act) {
     var div = document.createElement('div');
     div.className = 'dc-rich';
-
-    var largeUrl = resolveAsset(act.application_id, act.assets && act.assets.large_image);
-    var smallUrl = resolveAsset(act.application_id, act.assets && act.assets.small_image);
-
-    if (largeUrl) {
-      var wrap = document.createElement('div');
-      wrap.className = 'dc-rich-art-wrap';
-
-      var art = document.createElement('img');
-      art.className = 'dc-rich-art';
-      art.src = largeUrl;
-      art.alt = (act.assets && act.assets.large_text) || '';
-      wrap.appendChild(art);
-
-      if (smallUrl) {
-        var small = document.createElement('img');
-        small.className = 'dc-rich-small';
-        small.src = smallUrl;
-        small.alt = (act.assets && act.assets.small_text) || '';
-        wrap.appendChild(small);
-      }
-
-      div.appendChild(wrap);
-    }
 
     var info = document.createElement('div');
     info.className = 'dc-rich-info';
@@ -146,11 +202,9 @@
     if (act.state) {
       var state = document.createElement('span');
       state.className = 'dc-rich-state';
-      // Party size: show alongside state if present
       var stateText = act.state;
-      if (act.party && act.party.size) {
+      if (act.party && act.party.size)
         stateText += ' (' + act.party.size[0] + ' of ' + act.party.size[1] + ')';
-      }
       state.textContent = stateText;
       info.appendChild(state);
     }
@@ -158,52 +212,98 @@
     if (act.timestamps) {
       var timeEl = document.createElement('span');
       timeEl.className = 'dc-rich-time';
-      var ts = act.timestamps;
-      function updateTimer() {
-        var now = Date.now();
-        if (ts.end) {
-          var rem = ts.end - now;
-          timeEl.textContent = rem > 0 ? fmtTime(rem) + ' left' : '';
-        } else if (ts.start) {
-          timeEl.textContent = fmtTime(now - ts.start) + ' elapsed';
+      (function (el, ts) {
+        function tick() {
+          var now = Date.now();
+          if (ts.end) {
+            var rem = ts.end - now;
+            el.textContent = rem > 0 ? fmtTime(rem) + ' left' : '';
+          } else if (ts.start) {
+            el.textContent = fmtTime(now - ts.start) + ' elapsed';
+          }
         }
-      }
-      updateTimer();
-      timerInterval = setInterval(updateTimer, 1000);
+        tick();
+        timerIntervals.push(setInterval(tick, 1000));
+      })(timeEl, act.timestamps);
       info.appendChild(timeEl);
     }
 
     div.appendChild(info);
 
-    actEl.innerHTML = '';
-    actEl.appendChild(div);
-    actBarEl.classList.add('visible');
+    var largeKey = act.assets && act.assets.large_image;
+    var smallKey = act.assets && act.assets.small_image;
+
+    if (largeKey) {
+      // Activity provided an asset key — resolve it
+      var art = document.createElement('img');
+      art.className = 'dc-rich-art';
+      art.alt = (act.assets && act.assets.large_text) || '';
+      var wrap = makeArtWrap(art);
+      div.insertBefore(wrap, info);
+      tryLoadImage(art, act.application_id, largeKey);
+
+      if (smallKey) {
+        var small = document.createElement('img');
+        small.className = 'dc-rich-small';
+        small.alt = (act.assets && act.assets.small_text) || '';
+        small.style.display = 'none';
+        small.onload = function () { this.style.display = ''; };
+        wrap.appendChild(small);
+        tryLoadImage(small, act.application_id, smallKey);
+      }
+    } else if (act.application_id) {
+      // No assets at all — fall back to the app's cover/icon image
+      var art2 = document.createElement('img');
+      art2.className = 'dc-rich-art';
+      art2.alt = act.name;
+      var wrap2 = makeArtWrap(art2);
+      div.insertBefore(wrap2, info);
+      fetchAppIcon(act.application_id).then(function (url) {
+        if (url) art2.src = url;
+      });
+    }
+
+    return row(div);
   }
 
   function renderActivity(d) {
+    timerIntervals.forEach(clearInterval);
+    timerIntervals = [];
+    actEl.innerHTML = '';
+
+    var rows = [];
+    var activities = d.activities || [];
+
+    // 1. Custom status
+    for (var i = 0; i < activities.length; i++) {
+      if (activities[i].type === 4) { rows.push(buildCustomStatus(activities[i])); break; }
+    }
+
+    // 2. Playing (type 0)
+    for (var i = 0; i < activities.length; i++) {
+      if (activities[i].type === 0) rows.push(buildRich(activities[i]));
+    }
+
+    // 3. Spotify
     if (d.listening_to_spotify && d.spotify) {
-      renderSpotify(d.spotify);
+      rows.push(buildSpotify(d.spotify));
+    }
+
+    // 4. Everything else (streaming, watching, competing, other listening)
+    for (var i = 0; i < activities.length; i++) {
+      var act = activities[i];
+      if (act.type === 0 || act.type === 4) continue;
+      if (act.type === 2 && act.name === 'Spotify') continue;
+      rows.push(buildRich(act));
+    }
+
+    if (rows.length === 0) {
+      actBarEl.classList.remove('visible');
       return;
     }
 
-    var activities = d.activities || [];
-    var priority = [0, 1, 5, 3, 2];
-    var act = null;
-    for (var i = 0; i < priority.length; i++) {
-      var t = priority[i];
-      for (var j = 0; j < activities.length; j++) {
-        if (activities[j].type === t) { act = activities[j]; break; }
-      }
-      if (act) break;
-    }
-
-    if (act) {
-      renderRich(act);
-    } else {
-      clearInterval(timerInterval);
-      actEl.innerHTML = '';
-      actBarEl.classList.remove('visible');
-    }
+    rows.forEach(function (r) { actEl.appendChild(r); });
+    actBarEl.classList.add('visible');
   }
 
   function render(d) {
@@ -233,9 +333,7 @@
     }
 
     dotEl.className = 'dc-dot ' + (d.discord_status || 'offline');
-
     renderActivity(d);
-
     card.classList.add('ready');
   }
 
@@ -259,24 +357,18 @@
           .then(function (data) {
             var badges = data.badges || [];
             var namelineEl = document.querySelector('.dc-nameline');
-
             namelineEl.querySelectorAll('.dc-badge').forEach(function (b) { b.remove(); });
-
             badges.forEach(function (badge) {
               if ((CONFIG.hideBadges || []).indexOf(badge.id) !== -1) return;
-
               var wrap = document.createElement('span');
               wrap.className = 'tooltip-wrap';
-
               var img = document.createElement('img');
               img.src = 'https://cdn.discordapp.com/badge-icons/' + badge.icon + '.png';
               img.className = 'dc-badge';
               img.style.cssText = 'width:18px;height:18px;object-fit:contain;flex-shrink:0;';
-
               var tip = document.createElement('span');
               tip.className = 'tooltip';
               tip.textContent = badge.description || badge.id;
-
               wrap.appendChild(img);
               wrap.appendChild(tip);
               namelineEl.appendChild(wrap);
@@ -289,7 +381,8 @@
 
     ws.onclose = function () {
       clearInterval(hbInterval);
-      clearInterval(timerInterval);
+      timerIntervals.forEach(clearInterval);
+      timerIntervals = [];
       setTimeout(connect, 5000);
     };
   }

@@ -22,7 +22,12 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse 70% 35% at 50% 0%, rgba(61, 26, 61, 0.55) 0%, transparent 100%);
+  background:
+    radial-gradient(ellipse 55% 45% at 10% 12%,  rgba(217, 70, 239, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 40% at 90% 80%,  rgba(124, 58, 237, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 30% at 75% 15%,  rgba(168, 85, 247, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 20% 85%,  rgba(217, 70, 239, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,  rgba(124, 58, 237, 0.05) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -272,18 +277,25 @@ body::before {
 
 .dc-activity-bar {
   display: none;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 11px 20px;
   margin-top: 4px;
-  min-width: 0;
+  overflow: hidden;
 }
 .dc-activity-bar.visible { display: flex; }
 
-.dc-spot { display: flex; align-items: center; gap: 10px; }
+.dc-act-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  min-width: 0;
+}
+.dc-act-row + .dc-act-row { border-top: 1px solid var(--border); }
+
+.dc-spot { display: flex; align-items: center; gap: 10px; width: 100%; }
 .dc-art { width: 42px; height: 42px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
 .dc-track { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
 .dc-song { font-size: 13px; font-weight: 500; color: var(--white); }
@@ -457,12 +469,30 @@ body:has(button:hover) .cursor-ring {
   border-color: rgba(217, 70, 239, 0.8);
 }
 
+/* ── CUSTOM STATUS ── */
+.dc-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.dc-custom-text {
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ── RICH ACTIVITY ── */
 .dc-rich {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 .dc-rich-art-wrap {
@@ -471,8 +501,8 @@ body:has(button:hover) .cursor-ring {
 }
 
 .dc-rich-art {
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 8px;
   object-fit: cover;
   display: block;

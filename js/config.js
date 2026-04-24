@@ -1,20 +1,23 @@
+
+
 var CONFIG = {
   name: 'Cozy',
   bio:  'I am a idot',
   avatar: 'img/pfp.png',
 
   discord: '1180856619769274470',
+  twitchUser: 'huggcozy',
 
   hideBadges: ['quest_completed', 'orb_profile_badge'],
 
   socials: [
-    { title: 'GitHub',    url: 'https://github.com/cozyknatto', icon: 'github'    },
-    { title: 'Steam',    url: 'https://steamcommunity.com/id/muckelig', icon: 'steam'    },
-    { title: 'Discord Server',   url: 'https://discord.gg/pYFEHQw22c', icon: 'discord'   },
-    { title: 'Instagram', url: 'https://instagram.com/cozyknatto', icon: 'instagram' },
-    { title: 'Twitter',   url: 'https://x.com/cozyknatto', icon: 'twitter'   },
-    { title: 'YouTube',   url: 'https://youtube.com/@cozyknatto', icon: 'youtube'   },
-    { title: 'Twitch',    url: 'https://twitch.tv/huggcozy', icon: 'twitch'    },
+    { title: 'GitHub', url: 'https://github.com/cozyknatto', icon: 'github'},
+    { title: 'Steam', url: 'https://steamcommunity.com/id/muckelig', icon: 'steam'},
+    { title: 'Discord Server', url: 'https://discord.gg/pYFEHQw22c', icon: 'discord'},
+    { title: 'Instagram', url: 'https://instagram.com/cozyknatto', icon: 'instagram'},
+    { title: 'Twitter', url: 'https://x.com/cozyknatto', icon: 'twitter'},
+    { title: 'YouTube', url: 'https://youtube.com/@cozyknatto', icon: 'youtube'},
+    { title: 'Twitch', url: 'https://twitch.tv/huggcozy', icon: 'twitch'},
   ],
 
   projects: [
@@ -43,6 +46,14 @@ var CONFIG = {
       gradient: 'linear-gradient(135deg, #1a0d2b, #2d1045)',
       tags: ['Hypixel Skyblock', 'Minecraft'],
       img: 'img/hypixelautofriend.png',
-    }
+    },
+        {
+      name: 'No F5 Fire',
+      desc: 'Hides the Fire Overlay in Minecraft while in Third-Person. Open-source and free to use.',
+      url: 'https://modrinth.com/mod/nof5fire',
+      gradient: 'linear-gradient(135deg, #1a0d2b, #2d1045)',
+      tags: ['Minecraft'],
+      img: 'img/nof5fire.jpeg',
+    },
   ],
 };

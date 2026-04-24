@@ -51,21 +51,21 @@ document.addEventListener('mousemove', function (e) {
 
   function triggerEasterEgg() {
     // Burst aus Partikeln
-    var colors = ['#00e5a0', '#005c41', '#ffffff', '#00ffb3'];
+    var colors = ['#d946ef', '#7c3aed', '#ffffff', '#f0abfc'];
     for (var i = 0; i < 60; i++) {
       spawnParticle(colors[Math.floor(Math.random() * colors.length)]);
     }
 
     // Kurzer Screen-Flash
     var flash = document.createElement('div');
-    flash.style.cssText = 'position:fixed;inset:0;background:rgba(0,229,160,0.08);pointer-events:none;z-index:999;transition:opacity 0.6s ease;';
+    flash.style.cssText = 'position:fixed;inset:0;background:rgba(217,70,239,0.08);pointer-events:none;z-index:999;transition:opacity 0.6s ease;';
     document.body.appendChild(flash);
     setTimeout(function () { flash.style.opacity = '0'; }, 50);
     setTimeout(function () { flash.remove(); }, 700);
 
     // Toast
     var toast = document.getElementById('toast');
-    toast.textContent = '🎉 du kennst den code!';
+    toast.textContent = '🎉 Bring dich um!';
     toast.classList.add('show');
     setTimeout(function () {
       toast.classList.remove('show');
@@ -111,7 +111,7 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Twitch Live Badge
 (function () {
-  var twitchUser = 'huggcozy';
+  var twitchUser = CONFIG.twitchUser;
 
   fetch('https://decapi.me/twitch/uptime/' + twitchUser)
     .then(function (r) { return r.text(); })
