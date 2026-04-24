@@ -1,11 +1,11 @@
 :root {
-  --bg: #080c08;
-  --card: #0d140d;
+  --bg: #0a080c;
+  --card: #110d14;
   --border: rgba(255, 255, 255, 0.06);
-  --accent: #00e5a0;
-  --white: #e8ede8;
-  --muted: #4a5a4a;
-  --text: #8fa08f;
+  --accent: #d946ef;
+  --white: #ede8ed;
+  --muted: #5a4a6a;
+  --text: #9a8aaa;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,7 +22,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse 70% 35% at 50% 0%, rgba(26, 61, 43, 0.55) 0%, transparent 100%);
+  background: radial-gradient(ellipse 70% 35% at 50% 0%, rgba(61, 26, 61, 0.55) 0%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -52,7 +52,7 @@ body::before {
   animation: bob 5s ease-in-out infinite;
   padding: 3px;
   background: linear-gradient(var(--bg), var(--bg)) padding-box,
-              linear-gradient(var(--ring-angle, 0deg), #00e5a0, #005c41, #00e5a0) border-box;
+              linear-gradient(var(--ring-angle, 0deg), #d946ef, #7c3aed, #d946ef) border-box;
   border: 3px solid transparent;
 }
 
@@ -104,8 +104,8 @@ body::before {
 }
 
 .social:hover {
-  background: rgba(0, 229, 160, 0.1);
-  border-color: rgba(0, 229, 160, 0.35);
+  background: rgba(217, 70, 239, 0.1);
+  border-color: rgba(217, 70, 239, 0.35);
   color: var(--accent);
   transform: translateY(-2px);
 }
@@ -146,7 +146,7 @@ body::before {
 }
 
 .card:hover {
-  border-color: rgba(0, 229, 160, 0.22);
+  border-color: rgba(217, 70, 239, 0.22);
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -179,7 +179,7 @@ body::before {
   background: linear-gradient(
     105deg,
     transparent 40%,
-    rgba(0, 229, 160, 0.08) 50%,
+    rgba(217, 70, 239, 0.08) 50%,
     transparent 60%
   );
   background-size: 200% 100%;
@@ -202,8 +202,8 @@ body::before {
   font-weight: 500;
   padding: 2px 8px;
   border-radius: 100px;
-  background: rgba(0, 229, 160, 0.06);
-  border: 1px solid rgba(0, 229, 160, 0.14);
+  background: rgba(217, 70, 239, 0.06);
+  border: 1px solid rgba(217, 70, 239, 0.14);
   color: var(--accent);
 }
 
@@ -246,7 +246,7 @@ body::before {
 .dc-dot.online  { background: #23a55a; }
 .dc-dot.idle    { background: #f0b232; }
 .dc-dot.dnd     { background: #f23f43; }
-.dc-dot.offline { background: #545f54; }
+.dc-dot.offline { background: #545458; }
 
 .dc-info { min-width: 0; }
 .dc-nameline { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
@@ -259,8 +259,8 @@ body::before {
   font-size: 13px;
   font-weight: 600;
   color: var(--accent);
-  background: rgba(0, 229, 160, 0.08);
-  border: 1px solid rgba(0, 229, 160, 0.2);
+  background: rgba(217, 70, 239, 0.08);
+  border: 1px solid rgba(217, 70, 239, 0.2);
   border-radius: 8px;
   padding: 5px 12px 5px 8px;
   white-space: nowrap;
@@ -301,7 +301,7 @@ body::before {
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  background: #1a1f1a;
+  background: #1a171d;
   border: 1px solid var(--border);
   color: var(--white);
   font-size: 12px;
@@ -322,7 +322,7 @@ body::before {
   left: 50%;
   transform: translateX(-50%);
   border: 5px solid transparent;
-  border-top-color: #1a1f1a;
+  border-top-color: #1a171d;
 }
 
 .tooltip-wrap:hover .tooltip {
@@ -336,7 +336,7 @@ body::before {
   bottom: 32px;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  background: #1a1f1a;
+  background: #1a171d;
   border: 1px solid var(--border);
   color: var(--white);
   font-size: 13px;
@@ -361,7 +361,7 @@ body::before {
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle, rgba(0, 229, 160, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.07) 0%, transparent 70%);
   transform: translate(-50%, -50%);
   transition: left 0.08s ease, top 0.08s ease;
 }
@@ -419,7 +419,7 @@ body::before {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  box-shadow: 0 0 6px rgba(0, 229, 160, 0.6);
+  box-shadow: 0 0 6px rgba(217, 70, 239, 0.6);
 }
 
 /* Vertikale Linie */
@@ -429,7 +429,7 @@ body::before {
   left: 50%;
   top: 0;
   transform: translateX(-50%);
-  box-shadow: 0 0 6px rgba(0, 229, 160, 0.6);
+  box-shadow: 0 0 6px rgba(217, 70, 239, 0.6);
 }
 
 /* Mittelpunkt Lücke — kleines Quadrat das die Mitte ausblendet */
@@ -454,7 +454,7 @@ body:has(a:hover) .cursor-ring,
 body:has(button:hover) .cursor-ring {
   width: 44px;
   height: 44px;
-  border-color: rgba(0, 229, 160, 0.8);
+  border-color: rgba(217, 70, 239, 0.8);
 }
 
 /* ── FOOTER ── */

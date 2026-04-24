@@ -8,7 +8,7 @@ function renderHero() {
   document.title = CONFIG.name;
   document.getElementById('s-name').textContent   = CONFIG.name;
   document.getElementById('s-bio').textContent    = CONFIG.bio;
-  document.getElementById('s-footer').textContent = CONFIG.name.toLowerCase() + '.gay';
+  document.getElementById('s-footer').textContent = 'lutschmeineeier.com';
 
    // Typing Bio
   var bioEl = document.getElementById('s-bio');
