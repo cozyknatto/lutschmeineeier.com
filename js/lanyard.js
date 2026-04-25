@@ -56,7 +56,7 @@
     if (!key) return;
 
     if (key.indexOf('mp:external/') === 0) { imgEl.src = 'https://media.discordapp.net/external/' + key.slice('mp:external/'.length); return; }
-    if (key.indexOf('spotify:') === 0)      { imgEl.src = 'https://i.scdn.co/image/' + key.slice('spotify:'.length); return; }
+    if (key.indexOf('spotify:') === 0) { imgEl.src = 'https://i.scdn.co/image/' + key.slice('spotify:'.length); return; }
     if (key.indexOf('https://') === 0 || key.indexOf('http://') === 0) { imgEl.src = key; return; }
 
     // On CDN failure, try resolving named asset key -> numeric ID via API
@@ -76,7 +76,10 @@
     if (ms < 0) ms = 0;
     var s = Math.floor(ms / 1000);
     var m = Math.floor(s / 60);
+    var h = Math.floor(m / 60);
     s = s % 60;
+    m = m % 60;
+    if (h > 0) return h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
 
