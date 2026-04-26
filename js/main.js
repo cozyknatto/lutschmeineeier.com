@@ -168,11 +168,11 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // View Counter
 (function () {
-  fetch('https://api.countapi.xyz/hit/lutschmeineeier.com/visits')
+  fetch('https://api.counterapi.dev/v1/lutschmeineeier/visits/up')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var el = document.getElementById('s-views');
-      if (el && data.value) el.textContent = data.value.toLocaleString() + ' views';
+      if (el && data.count) el.textContent = data.count.toLocaleString() + ' views';
     })
     .catch(function () {});
 })();
