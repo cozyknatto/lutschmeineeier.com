@@ -166,6 +166,17 @@ document.getElementById('s-initial').addEventListener('click', function () {
   document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
 })();
 
+// View Counter
+(function () {
+  fetch('https://api.countapi.xyz/hit/lutschmeineeier.com/visits')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var el = document.getElementById('s-views');
+      if (el && data.value) el.textContent = data.value.toLocaleString() + ' views';
+    })
+    .catch(function () {});
+})();
+
 // Animated Title + Come Back
 (function () {
   var frames   = ['Cozy', 'Coz', 'Co', 'C', 'Co', 'Coz', 'Cozy', '~ozy', 'C~zy', 'Co~y', 'Coz~', 'Cozy', 'Coz y', 'Co z y', 'C o z y', 'C o zy', 'C ozy'];
