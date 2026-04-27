@@ -7,30 +7,27 @@ function renderHero() {
   }
   document.title = CONFIG.name;
   document.getElementById('s-name').textContent   = CONFIG.name;
-  document.getElementById('s-bio').textContent    = CONFIG.bio;
   document.getElementById('s-footer').textContent = 'lutschmeineeier.com';
 
-   // Typing Bio
   var bioEl = document.getElementById('s-bio');
   var text  = CONFIG.bio;
   var i     = 0;
   bioEl.textContent = '';
 
-  // Cursor Element
-  var cursor = document.createElement('span');
-  cursor.textContent = '|';
-  cursor.style.cssText = 'color:var(--accent);animation:blink 0.7s step-end infinite;margin-left:1px;';
-  bioEl.appendChild(cursor);
+  var blinkCursor = document.createElement('span');
+  blinkCursor.textContent = '|';
+  blinkCursor.style.cssText = 'color:var(--pink);animation:blink 0.7s step-end infinite;margin-left:1px;';
+  bioEl.appendChild(blinkCursor);
 
   setTimeout(function type() {
     if (i < text.length) {
-      bioEl.insertBefore(document.createTextNode(text[i]), cursor);
+      bioEl.insertBefore(document.createTextNode(text[i]), blinkCursor);
       i++;
       setTimeout(type, 35 + Math.random() * 25);
     } else {
       setTimeout(function () {
-        cursor.style.animation = 'none';
-        cursor.style.opacity   = '0';
+        blinkCursor.style.animation = 'none';
+        blinkCursor.style.opacity   = '0';
       }, 1000);
     }
   }, 600);
@@ -39,23 +36,13 @@ function renderHero() {
 function renderSocials() {
   var wrap = document.getElementById('s-socials');
   CONFIG.socials.forEach(function (s) {
-    var outer = document.createElement('div');
-    outer.className = 'tooltip-wrap';
-
     var a = document.createElement('a');
     a.href      = s.url;
     a.className = 'social';
     a.target    = '_blank';
     a.rel       = 'noopener noreferrer';
-    a.innerHTML = '<svg viewBox="0 0 24 24">' + ICONS[s.icon] + '</svg>';
-
-    var tip = document.createElement('span');
-    tip.className   = 'tooltip';
-    tip.textContent = s.title;
-
-    outer.appendChild(a);
-    outer.appendChild(tip);
-    wrap.appendChild(outer);
+    a.innerHTML = '<svg viewBox="0 0 24 24">' + ICONS[s.icon] + '</svg><span>' + s.title + '</span>';
+    wrap.appendChild(a);
   });
 }
 
@@ -66,7 +53,8 @@ function renderProjects() {
     a.href      = p.url;
     a.className = 'card';
     a.setAttribute('data-a', '');
-    a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.target = '_blank';
+    a.rel    = 'noopener noreferrer';
 
     var imgHtml  = p.img ? '<img src="' + p.img + '" alt="' + p.name + '">' : '';
     var tagsHtml = (p.tags || []).map(function (t) {
@@ -76,7 +64,7 @@ function renderProjects() {
     a.innerHTML =
       '<div class="thumb">' +
         '<div class="thumb-bg" style="background:' + p.gradient + '"></div>' +
-        '<div class="thumb-emoji">' + p.emoji + '</div>' +
+        (p.emoji ? '<div class="thumb-emoji">' + p.emoji + '</div>' : '') +
         imgHtml +
       '</div>' +
       '<div class="card-body">' +

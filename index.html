@@ -1,64 +1,82 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cozy</title>
-    <meta name="description" content="Cozy" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cozy</title>
+  <meta name="description" content="Cozy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Aurora -->
+  <div class="aurora">
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+  </div>
+  <!-- Mesh grid -->
+  <div class="mesh"></div>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"><div class="cursor-center"></div></div>
+  <!-- Mouse glow -->
+  <div class="mouse-glow" id="mouse-glow"></div>
+  <!-- Toast -->
+  <div class="toast" id="toast">Copied!</div>
 
-  <body>
-        <div class="cursor" id="cursor"><div class="cursor-center"></div></div>
-    <div class="mouse-glow" id="mouse-glow"></div>
-    <div class="toast" id="toast">Copied!</div>
-    <div class="wrap">
-      <section class="hero">
+  <div class="wrap">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="avatar-shell">
+        <div class="avatar-glow"></div>
         <div class="avatar" data-a id="s-initial"></div>
-        <h1 class="name" data-a id="s-name"></h1>
-        <p class="bio" data-a id="s-bio"></p>
-        <div class="socials" data-a id="s-socials"></div>
-      </section>
+      </div>
+      <h1 class="name" data-a id="s-name"></h1>
+      <p class="bio" data-a id="s-bio"></p>
+      <div class="socials" data-a id="s-socials"></div>
+    </section>
 
-      <div class="dc" id="dc">
-        <div class="dc-left">
-          <div class="dc-avwrap">
-            <img class="dc-av" id="dc-av" src="" alt="avatar" />
-            <span class="dc-dot offline" id="dc-dot"></span>
+    <!-- Discord Card -->
+    <div class="dc" id="dc">
+      <div class="dc-left">
+        <div class="dc-avwrap">
+          <img class="dc-av" id="dc-av" alt="avatar" />
+          <span class="dc-dot offline" id="dc-dot"></span>
+        </div>
+        <div class="dc-info">
+          <div class="dc-nameline">
+            <span class="dc-name" id="dc-name"></span>
           </div>
-          <div class="dc-info">
-            <div class="dc-nameline">
-              <span class="dc-name" id="dc-name"></span>
-            </div>
-            <div class="dc-sub">
-              <span class="dc-handle" id="dc-handle"></span>
-            </div>
+          <div class="dc-sub">
+            <span class="dc-handle" id="dc-handle"></span>
           </div>
         </div>
-        <span class="dc-clan" id="dc-clan">
-          <img class="dc-clan-badge" id="dc-clan-badge" src="" alt="" />
-          <span id="dc-clan-tag"></span>
-        </span>
       </div>
-
-      <div class="dc-activity-bar" id="dc-activity-bar">
-        <div id="dc-activity"></div>
-      </div>
-
-      <p class="section-title" data-a>projects</p>
-      <div class="grid" id="s-grid"></div>
-      <footer data-a id="s-footer"></footer>
+      <span class="dc-clan" id="dc-clan">
+        <img class="dc-clan-badge" id="dc-clan-badge" alt="" />
+        <span id="dc-clan-tag"></span>
+      </span>
     </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/icons.js"></script>
-    <script src="js/render.js"></script>
-    <script src="js/lanyard.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+    <div class="dc-activity-bar" id="dc-activity-bar">
+      <div id="dc-activity"></div>
+    </div>
 
+    <!-- Projects -->
+    <p class="section-title" data-a>projects</p>
+    <div class="grid" id="s-grid"></div>
 
+    <footer data-a id="s-footer"></footer>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/lanyard.js"></script>
+  <script src="js/main.js"></script>
+</body>
 </html>
