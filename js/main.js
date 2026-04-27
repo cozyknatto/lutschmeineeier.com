@@ -25,13 +25,6 @@ document.getElementById('dc-handle').addEventListener('click', function () {
   setTimeout(function () { toast.classList.remove('show'); }, 2000);
 });
 
-// Mouse glow
-var glow = document.getElementById('mouse-glow');
-document.addEventListener('mousemove', function (e) {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top  = e.clientY + 'px';
-});
-
 // Avatar click pop
 document.getElementById('s-initial').addEventListener('click', function () {
   var av = this;
@@ -40,34 +33,6 @@ document.getElementById('s-initial').addEventListener('click', function () {
   av.classList.add('popping');
   setTimeout(function () { av.classList.remove('popping'); }, 400);
 });
-
-// Custom cursor
-(function () {
-  var cur = document.getElementById('cursor');
-  cur.style.transition = 'width 0.15s ease, height 0.15s ease, opacity 0.2s ease';
-
-  document.addEventListener('mousemove', function (e) {
-    cur.style.left = e.clientX + 'px';
-    cur.style.top  = e.clientY + 'px';
-  });
-
-  document.addEventListener('mouseover', function (e) {
-    if (e.target.closest('a, button, [role="button"]')) {
-      cur.style.width  = '28px';
-      cur.style.height = '28px';
-    }
-  });
-
-  document.addEventListener('mouseout', function (e) {
-    if (e.target.closest('a, button, [role="button"]')) {
-      cur.style.width  = '20px';
-      cur.style.height = '20px';
-    }
-  });
-
-  document.addEventListener('mouseleave', function () { cur.style.opacity = '0'; });
-  document.addEventListener('mouseenter', function () { cur.style.opacity = '1'; });
-})();
 
 // Konami code easter egg
 (function () {
