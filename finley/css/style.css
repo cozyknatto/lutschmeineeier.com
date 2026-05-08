@@ -1,15 +1,15 @@
 /* ── TOKENS ── */
 :root {
-  --bg:       #0d0812;
-  --card:     #150e1c;
-  --card2:    #1a1124;
-  --border:   rgba(244,63,138,0.10);
-  --border2:  rgba(255,255,255,0.05);
-  --pink:     #f43f8a;
-  --lavender: #c084fc;
-  --white:    #f5eeff;
-  --muted:    #6b5080;
-  --text:     #a08ab8;
+  --bg:       #000000;
+  --card:     #0a0a0a;
+  --card2:    #121212;
+  --border:   rgba(59,130,246,0.08);
+  --border2:  rgba(255,255,255,0.03);
+  --pink:     #2563eb;
+  --lavender: #3b82f6;
+  --white:    #ffffff;
+  --muted:    #6b7280;
+  --text:     #9ca3af;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +31,7 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.5;
+  opacity: 0.25;
 }
 
 /* ── AURORA BLOBS ── */
@@ -47,42 +47,42 @@ body::after {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.55;
+  opacity: 0.25;
   mix-blend-mode: screen;
   will-change: transform;
 }
 
 .aurora-blob:nth-child(1) {
   width: 60vw; height: 60vw;
-  background: radial-gradient(circle, #f43f8a 0%, transparent 70%);
+  background: radial-gradient(circle, #1e3a8a 0%, transparent 70%);
   top: -15%; left: -15%;
   animation: drift1 18s ease-in-out infinite alternate;
 }
 .aurora-blob:nth-child(2) {
   width: 55vw; height: 55vw;
-  background: radial-gradient(circle, #c084fc 0%, transparent 70%);
+  background: radial-gradient(circle, #1e40af 0%, transparent 70%);
   bottom: -20%; right: -15%;
   animation: drift2 22s ease-in-out infinite alternate;
 }
 .aurora-blob:nth-child(3) {
   width: 40vw; height: 40vw;
-  background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+  background: radial-gradient(circle, #172554 0%, transparent 70%);
   top: 30%; left: 40%;
-  opacity: 0.3;
+  opacity: 0.15;
   animation: drift3 26s ease-in-out infinite alternate;
 }
 .aurora-blob:nth-child(4) {
   width: 35vw; height: 35vw;
-  background: radial-gradient(circle, #f43f8a 0%, transparent 70%);
+  background: radial-gradient(circle, #1e3a8a 0%, transparent 70%);
   bottom: 10%; left: -5%;
-  opacity: 0.2;
+  opacity: 0.12;
   animation: drift4 20s ease-in-out infinite alternate;
 }
 .aurora-blob:nth-child(5) {
   width: 30vw; height: 30vw;
-  background: radial-gradient(circle, #e879f9 0%, transparent 70%);
+  background: radial-gradient(circle, #1e40af 0%, transparent 70%);
   top: -5%; right: 10%;
-  opacity: 0.25;
+  opacity: 0.15;
   animation: drift1 15s ease-in-out infinite alternate-reverse;
 }
 
@@ -110,12 +110,12 @@ body .mesh {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(244,63,138,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244,63,138,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(59,130,246,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.02) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
-  opacity: 0.6;
+  opacity: 0.3;
 }
 
 /* ── LAYOUT ── */
@@ -148,7 +148,7 @@ body .mesh {
   position: absolute;
   inset: -18px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(244,63,138,0.30) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59,130,246,0.20) 0%, transparent 70%);
   filter: blur(12px);
   animation: pulse-glow 4s ease-in-out infinite;
 }
@@ -178,7 +178,7 @@ body .mesh {
   padding: 3px;
   background:
     linear-gradient(var(--bg), var(--bg)) padding-box,
-    linear-gradient(var(--ring-angle, 0deg), #f43f8a, #c084fc, #f43f8a) border-box;
+    linear-gradient(var(--ring-angle, 0deg), #3b82f6, #60a5fa, #3b82f6) border-box;
   border: 3px solid transparent;
   animation: bob 5s ease-in-out infinite, ring-spin 3s linear infinite;
   cursor: pointer;
@@ -207,7 +207,7 @@ body .mesh {
   color: var(--white);
   line-height: 0.9;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, #fff 30%, var(--lavender) 70%, var(--pink) 100%);
+  background: linear-gradient(135deg, #fff 30%, #60a5fa 70%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -256,16 +256,16 @@ body .mesh {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(244,63,138,0.12), rgba(192,132,252,0.08));
+  background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(96,165,250,0.08));
   opacity: 0;
   transition: opacity 0.2s;
 }
 
 .social:hover {
-  border-color: rgba(244,63,138,0.28);
+  border-color: rgba(59,130,246,0.28);
   color: var(--white);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244,63,138,0.12);
+  box-shadow: 0 6px 20px rgba(59,130,246,0.12);
 }
 .social:hover::before { opacity: 1; }
 
@@ -292,10 +292,10 @@ body .mesh {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: rgba(18,11,26,0.65);
+  background: rgba(10,10,10,0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(244,63,138,0.12);
+  border: 1px solid rgba(59,130,246,0.15);
   border-radius: 20px;
   padding: 18px 20px;
   margin: 28px 0 0;
@@ -310,7 +310,7 @@ body .mesh {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(244,63,138,0.6), rgba(192,132,252,0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.6), rgba(96,165,250,0.6), transparent);
 }
 
 .dc.ready { opacity: 1; }
@@ -323,7 +323,7 @@ body .mesh {
   border-radius: 50%;
   display: block;
   background: var(--card);
-  border: 2px solid rgba(244,63,138,0.2);
+  border: 2px solid rgba(59,130,246,0.2);
 }
 
 .dc-dot {
@@ -331,7 +331,7 @@ body .mesh {
   bottom: 1px; right: 1px;
   width: 13px; height: 13px;
   border-radius: 50%;
-  border: 2.5px solid #0d0812;
+  border: 2.5px solid #000000;
   background: var(--muted);
   transition: background 0.3s;
 }
@@ -351,8 +351,8 @@ body .mesh {
   font-size: 11.5px;
   font-weight: 700;
   color: var(--pink);
-  background: rgba(244,63,138,0.08);
-  border: 1px solid rgba(244,63,138,0.18);
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.18);
   border-radius: 100px;
   padding: 3px 10px 3px 7px;
   white-space: nowrap;
@@ -366,10 +366,10 @@ body .mesh {
 .dc-activity-bar {
   display: none;
   flex-direction: column;
-  background: rgba(18,11,26,0.55);
+  background: rgba(10,10,10,0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(244,63,138,0.10);
+  border: 1px solid rgba(59,130,246,0.12);
   border-radius: 16px;
   margin-top: 6px;
   overflow: hidden;
@@ -399,7 +399,7 @@ body .mesh {
 .dc-rich { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 .dc-rich-art-wrap { position: relative; flex-shrink: 0; }
 .dc-rich-art { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; display: block; background: var(--card); box-shadow: 0 4px 14px rgba(0,0,0,0.45); }
-.dc-rich-small { position: absolute; bottom: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #0d0812; object-fit: cover; }
+.dc-rich-small { position: absolute; bottom: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid #000000; object-fit: cover; }
 .dc-rich-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .dc-rich-label { font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink); opacity: 0.85; }
 .dc-rich-name { font-size: 13px; font-weight: 600; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -428,7 +428,7 @@ body .mesh {
 @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
 
 .card {
-  background: rgba(21,14,28,0.55);
+  background: rgba(10,10,10,0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border2);
@@ -442,9 +442,9 @@ body .mesh {
 }
 
 .card:hover {
-  border-color: rgba(244,63,138,0.25);
+  border-color: rgba(59,130,246,0.25);
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,63,138,0.08);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.08);
 }
 
 .thumb { position: relative; height: 160px; overflow: hidden; flex-shrink: 0; }
@@ -460,7 +460,7 @@ body .mesh {
 .thumb::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(13,8,18,0.6) 100%);
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.6) 100%);
   z-index: 2;
 }
 
@@ -468,7 +468,7 @@ body .mesh {
 .thumb::before {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(244,63,138,0.10) 50%, transparent 60%);
+  background: linear-gradient(105deg, transparent 40%, rgba(59,130,246,0.10) 50%, transparent 60%);
   background-size: 200% 100%;
   background-position: 200% 0;
   transition: background-position 0.55s ease;
@@ -487,8 +487,8 @@ body .mesh {
   letter-spacing: 0.04em;
   padding: 2px 8px;
   border-radius: 100px;
-  background: rgba(244,63,138,0.07);
-  border: 1px solid rgba(244,63,138,0.18);
+  background: rgba(59,130,246,0.07);
+  border: 1px solid rgba(59,130,246,0.18);
   color: var(--pink);
 }
 
@@ -497,8 +497,8 @@ body .mesh {
   position: fixed;
   bottom: 32px; left: 50%;
   transform: translateX(-50%) translateY(8px);
-  background: #1e1429;
-  border: 1px solid rgba(244,63,138,0.2);
+  background: #0a1220;
+  border: 1px solid rgba(59,130,246,0.2);
   color: var(--white);
   font-size: 13px; font-weight: 500;
   padding: 8px 18px;

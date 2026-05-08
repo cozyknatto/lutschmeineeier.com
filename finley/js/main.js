@@ -1,6 +1,5 @@
 renderHero();
 renderSocials();
-renderProjects();
 
 // Entrance animation
 (function () {
@@ -46,11 +45,11 @@ document.getElementById('s-initial').addEventListener('click', function () {
   });
 
   function triggerEgg() {
-    var colors = ['#f43f8a', '#c084fc', '#ffffff', '#f9a8d4'];
+    var colors = ['#2563eb', '#3b82f6', '#ffffff', '#60a5fa'];
     for (var i = 0; i < 60; i++) spawnParticle(colors[Math.floor(Math.random() * colors.length)]);
 
     var flash = document.createElement('div');
-    flash.style.cssText = 'position:fixed;inset:0;background:rgba(244,63,138,0.08);pointer-events:none;z-index:9990;transition:opacity 0.6s ease;';
+    flash.style.cssText = 'position:fixed;inset:0;background:rgba(37,99,235,0.08);pointer-events:none;z-index:9990;transition:opacity 0.6s ease;';
     document.body.appendChild(flash);
     setTimeout(function () { flash.style.opacity = '0'; }, 50);
     setTimeout(function () { flash.remove(); }, 700);
@@ -82,13 +81,13 @@ document.getElementById('s-initial').addEventListener('click', function () {
 
 // Animated title
 (function () {
-  var frames = ['Cozy', 'Coz', 'Co', 'C', 'Co', 'Coz', 'Cozy', '~ozy', 'C~zy', 'Co~y', 'Coz~', 'Cozy'];
+  var frames = ['Finley', 'Finle', 'Finl', 'Fin', 'Fi', 'F', 'Fi', 'Fin', 'Finl', 'Finle', 'Finley', '~inley', 'F~nley', 'Fi~ley', 'Fin~ey', 'Finl~y', 'Finle~', 'Finley'];
   var idx = 0, interval = null;
   function start() { interval = setInterval(function () { idx = (idx + 1) % frames.length; document.title = frames[idx]; }, 1000); }
   function stop()  { clearInterval(interval); document.title = CONFIG.name; }
   start();
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) { stop(); document.title = 'Cozy'; } else { document.title = CONFIG.name; start(); }
+    if (document.hidden) { stop(); document.title = 'Finley'; } else { document.title = CONFIG.name; start(); }
   });
 })();
 
