@@ -7,7 +7,7 @@ function renderHero() {
   }
   document.title = CONFIG.name;
   document.getElementById('s-name').textContent   = CONFIG.name;
-  document.getElementById('s-footer').textContent = 'lutschmeineeier.com';
+  document.getElementById('s-footer').textContent = 'lutschmeineeier.com/finley';
 
   var bioEl = document.getElementById('s-bio');
   var text  = CONFIG.bio;
