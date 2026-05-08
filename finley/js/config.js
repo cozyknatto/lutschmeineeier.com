@@ -1,12 +1,12 @@
 
 
 var CONFIG = {
-  name: 'Cozy',
-  bio:  'I am a idot',
+  name: 'Finley',
+  bio:  'so ein Rocket League bastard',
   avatar: 'img/pfp.png',
 
-  discord: '1180856619769274470',
-  twitchUser: 'huggcozy',
+  discord: '781897893455593512',
+  twitchUser: 'finleyrll',
 
   hideBadges: ['quest_completed', 'orb_profile_badge'],
 
