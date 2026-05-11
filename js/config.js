@@ -13,6 +13,7 @@ var CONFIG = {
   socials: [
     { title: 'GitHub', url: 'https://github.com/cozyknatto', icon: 'github'},
     { title: 'Steam', url: 'https://steamcommunity.com/id/muckelig', icon: 'steam'},
+    { title: 'Steam 2', url: 'https://steamcommunity.com/id/fsk16', icon: 'steam'},
     { title: 'Discord Server', url: 'https://discord.gg/pYFEHQw22c', icon: 'discord'},
     { title: 'Instagram', url: 'https://instagram.com/cozyknatto', icon: 'instagram'},
     { title: 'Twitter', url: 'https://x.com/cozyknatto', icon: 'twitter'},
